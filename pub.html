@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>论文列表 · Qiang Xiao</title>
+    <!-- 使用优雅的衬线字体 + 无衬线字体组合 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f8fafc;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ---- 导航栏（带设计感） ---- */
+        .navbar {
+            max-width: 1100px;
+            width: 100%;
+            margin-bottom: 2rem;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 60px;
+            box-shadow: 0 8px 30px -8px rgba(0, 20, 40, 0.08), 0 2px 8px rgba(0,0,0,0.02);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            padding: 0.6rem 1.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            transition: all 0.2s ease;
+        }
+
+        .navbar:hover {
+            background: rgba(255, 255, 255, 0.85);
+            border-color: rgba(200, 215, 235, 0.5);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #0b1a33;
+            letter-spacing: -0.3px;
+            text-decoration: none;
+        }
+
+        .nav-brand .brand-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(145deg, #1d3a5c, #0b1a33);
+            border-radius: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(11, 26, 51, 0.15);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: #2a405c;
+            padding: 0.4rem 1.1rem;
+            border-radius: 40px;
+            transition: all 0.2s ease;
+            letter-spacing: 0.2px;
+            background: transparent;
+            border: 1px solid transparent;
+        }
+
+        .nav-links a:hover {
+            background: #ebf2fa;
+            color: #0b1a33;
+            border-color: #d0ddee;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0, 20, 40, 0.04);
+        }
+
+        .nav-links a.active {
+            background: #0b1a33;
+            color: white;
+            border-color: #0b1a33;
+            box-shadow: 0 4px 12px rgba(11, 26, 51, 0.15);
+        }
+
+        .nav-links a.active:hover {
+            background: #1d3a5c;
+            border-color: #1d3a5c;
+        }
+
+        /* 导航右侧小点缀 */
+        .nav-meta {
+            font-size: 0.7rem;
+            color: #8ba0bb;
+            background: #f0f4fa;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            border: 1px solid #e1e9f2;
+            letter-spacing: 0.3px;
+            display: none; /* 默认隐藏，在宽屏显示 */
+        }
+
+        @media (min-width: 760px) {
+            .nav-meta {
+                display: inline-block;
+            }
+        }
+
+        /* ---- 容器 ---- */
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 20px 60px -12px rgba(0, 0, 0, 0.08), 0 4px 20px -8px rgba(0, 0, 0, 0.04);
+            padding: 2.5rem 2.8rem;
+            transition: all 0.2s ease;
+        }
+
+        /* 页眉区域 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 2.2rem;
+            border-bottom: 2px solid #eef2f6;
+            padding-bottom: 1.2rem;
+        }
+
+        .header h1 {
+            font-family: 'Merriweather', serif;
+            font-weight: 700;
+            font-size: 2rem;
+            letter-spacing: -0.02em;
+            color: #0b1a33;
+            background: linear-gradient(145deg, #0b1a33 0%, #1d3a5c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header .badge {
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: #eef2f6;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            color: #1e3a5f;
+            letter-spacing: 0.3px;
+            border: 1px solid #dce3ec;
+        }
+
+        /* 论文列表 */
+        .paper-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+        }
+
+        .paper-item {
+            background: #ffffff;
+            border-radius: 1.2rem;
+            padding: 1.4rem 1.8rem;
+            border: 1px solid #ebf0f7;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .paper-item:hover {
+            border-color: #cbd8e8;
+            box-shadow: 0 8px 24px -10px rgba(18, 52, 97, 0.10);
+            background: #fbfdff;
+            transform: translateY(-2px);
+        }
+
+        /* 编号装饰 */
+        .paper-number {
+            font-family: 'Inter', monospace;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: #8ba0bb;
+            background: #f0f4fa;
+            border-radius: 40px;
+            min-width: 2.2rem;
+            height: 2.2rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 0.4rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+            border: 1px solid #e1e9f2;
+        }
+
+        .paper-content {
+            flex: 1;
+            line-height: 1.6;
+            font-size: 0.98rem;
+            color: #1f2a3f;
+        }
+
+        /* 作者行 */
+        .authors {
+            font-weight: 400;
+            color: #1f2a3f;
+            margin-bottom: 0.1rem;
+        }
+
+        .authors .highlight {
+            color: #b22234;
+            font-weight: 600;
+        }
+
+        .authors .corresponding {
+            font-weight: 400;
+            color: #1f2a3f;
+        }
+
+        .authors .corresponding .highlight {
+            color: #b22234;
+            font-weight: 600;
+        }
+
+        /* 论文标题 */
+        .paper-title {
+            font-weight: 500;
+            color: #0b1a33;
+            display: inline-block;
+            margin-right: 0.2rem;
+        }
+
+        /* 期刊/会议名 — 蓝色 */
+        .journal {
+            color: #0a4b7a;
+            font-weight: 500;
+        }
+
+        /* 卷期页码年份 */
+        .meta {
+            color: #3e5670;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+        }
+
+        .meta .year {
+            font-weight: 500;
+            color: #1f3a5f;
+        }
+
+        /* ESI 高亮标签 */
+        .esi-tag {
+            display: inline-block;
+            background: #d4e2f0;
+            color: #0a3b5e;
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 0.1rem 0.7rem;
+            border-radius: 30px;
+            margin-left: 0.4rem;
+            letter-spacing: 0.3px;
+            border: 1px solid #b8cee4;
+            vertical-align: middle;
+            line-height: 1.6;
+        }
+
+        /* 响应式 */
+        @media (max-width: 700px) {
+            .container {
+                padding: 1.5rem 1rem;
+                border-radius: 1.5rem;
+            }
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+            .header h1 {
+                font-size: 1.7rem;
+            }
+            .paper-item {
+                padding: 1rem 1.2rem;
+                flex-direction: column;
+                gap: 0.4rem;
+            }
+            .paper-number {
+                align-self: flex-start;
+                min-width: 2rem;
+                height: 2rem;
+                font-size: 0.7rem;
+            }
+            .paper-content {
+                font-size: 0.92rem;
+            }
+            .navbar {
+                padding: 0.5rem 1.2rem;
+                border-radius: 40px;
+                flex-direction: column;
+                gap: 0.4rem;
+                align-items: stretch;
+            }
+            .nav-links {
+                justify-content: center;
+            }
+            .nav-brand {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+            .container {
+                padding: 1rem 0.8rem;
+            }
+            .paper-item {
+                padding: 0.9rem 1rem;
+            }
+            .nav-links a {
+                padding: 0.3rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* 小点缀 */
+        .footer-note {
+            margin-top: 2.5rem;
+            font-size: 0.8rem;
+            color: #8b9fb5;
+            border-top: 1px solid #eef2f6;
+            padding-top: 1.2rem;
+            text-align: right;
+            letter-spacing: 0.2px;
+        }
+
+        .footer-note span {
+            background: #f2f6fc;
+            padding: 0.15rem 0.8rem;
+            border-radius: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏（设计感 · 毛玻璃 + 微交互） -->
+    <nav class="navbar">
+        <a href="#" class="nav-brand">
+            <span class="brand-icon">✧</span>
+            <span>Q. Xiao</span>
+        </a>
+        <div class="nav-links">
+            <a href="#" class="active">论文列表</a>
+            <a href="#">首页</a>
+            <a href="#">关于</a>
+            <a href="#">联系</a>
+        </div>
+        <span class="nav-meta">✦ 2026</span>
+    </nav>
+
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header">
+            <h1>📄 论文列表</h1>
+            <span class="badge">Qiang Xiao · 2026</span>
+        </div>
+
+        <!-- 论文列表 -->
+        <div class="paper-list">
+
+            <!-- 1 -->
+            <div class="paper-item">
+                <span class="paper-number">1</span>
+                <div class="paper-content">
+                    <div class="authors">
+                        <span class="highlight">Qiang Xiao</span>, S. Yang, Z.G. Zeng, T.W. Huang, N.R. Pal,
+                    </div>
+                    <span class="paper-title">“Null-space-based prescribed-time formation control with collision and obstacle avoidance,”</span>
+                    <span class="journal">IEEE Transactions on Control of Network Systems,</span>
+                    <span class="meta">vol. 12, no. 4, pp. 3003-3014, <span class="year">2025</span>.</span>
+                </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="paper-item">
+                <span class="paper-number">2</span>
+                <div class="paper-content">
+                    <div class="authors">
+                        <span class="highlight">Qiang Xiao</span>, Z.G. Zeng, J.G. Lai, T.W. Huang, and F.L. Lewis,
+                    </div>
+                    <span class="paper-title">“Stability analysis of switched homogeneous positive system with unstable subsystems,”</span>
+                    <span class="journal">SIAM Journal on Control and Optimization,</span>
+                    <span class="meta">vol. 63, no. 4, pp. 2915-2935, <span class="year">2025</span>.</span>
+                </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="paper-item">
+                <span class="paper-number">3</span>
+                <div class="paper-content">
+                    <div class="authors">
+                        <span class="highlight">Qiang Xiao</span>, Z.G. Zeng, T.W. Huang, and F.L. Lewis,
+                    </div>
+                    <span class="paper-title">“Stability of delayed homogeneous positive differential-difference systems,”</span>
+                    <span class="journal">IEEE Transactions on Automatic Control,</span>
+                    <span class="meta">vol. 69, no. 1, pp. 559-565, <span class="year">2024</span>.</span>
+                </div>
+            </div>
+
+            <!-- 4 -->
+            <div class="paper-item">
+                <span class="paper-number">4</span>
+                <div class="paper-content">
+                    <div class="authors">
+                        <span class="highlight">Qiang Xiao</span>, Z.K. Huang, Z.G. Zeng, T.W. Huang, and F.L. Lewis,
+                    </div>
+                    <span class="paper-title">“Stability of homogeneous positive systems with time-varying delays,”</span>
+                    <span class="journal">Automatica,</span>
+                    <span class="meta">vol. 152, Article 110965, <span class="year">2023</span>.</span>
+                </div>
+            </div>
+
+            <!-- 5 -->
+            <div class="paper-item">
+                <span class="paper-number">5</span>
+                <div class="paper-content">
+                    <div class="authors">
+                        <span class="highlight">Qiang Xiao</span>, T.W. Huang, and Z.G. Zeng,
+                    </div>
+                    <span class="paper-title">“On exponential stability of delayed discrete-time complex-valued inertial neural networks,”</span>
+                    <span class="journal">IEEE Transactions on Cybernetics,</span>
+                    <span class="meta">vol. 52, no. 5, pp. 3483-3494, May <span class="year">2022</span>.</span>
+                </div>
+            </div>
+
+            <!-- 6 -->
+            <div class="paper-item">
+                <span class="paper-number">6</span>
+                <div class="paper-content">
+                    <div class="authors">
+                        <span class="highlight">Qiang Xiao</span>, T.W. Huang, and Z.G. Zeng,
+                    </div>
+                    <span class="paper-title">“Synchronization of timescale-type nonautonomous neural networks with proportional delays,”</span>
+                    <span class="journal">IEEE Transactions on Systems Man and Cybernetics: Systems,</span>
+                    <span class="meta">vol. 52, no. 4, pp. 2167-2173, Apr. <span class="year">2022</span>.</span>
+                </div>
+            </div>
+
+            <!-- 7 -->
+            <div class="paper-item">
+                <span class="paper-number">7</span>
+                <div class="paper-content">
+                    <div class="authors">
+                        <span class="highlight">Qiang Xiao</span>, Z.G. Zeng, T.W. Huang, and F.L. Lewis,
+                    </div>
+                    <span class="paper-title">“Positivity and stability of coupled differential-difference equations with time-varying delay on time scales,”</span>
+                    <span class="journal">Automatica,</span>
+                    <span class="meta">vol. 131, Article 109774, Jun. <span class="year">2021</span>.</span>
+                </div>
+            </div>
+
+            <!-- 8 -->
+            <div class="paper-item">
+                <span class="paper-number">8</span>
+                <div class="paper-content">
+                    <div class="authors">
+                        <span class="highlight">Qiang Xiao</span> and T.W. Huang,
+                    </div>
+                    <span class="paper-title">“Quasi-synchronization of discrete-time inertial neural networks with parameter mismatches and delays,”</span>
+                    <span class="journal">IEEE Transactions on Cybernetics,</span>
+                    <span class="meta">vol. 51, no. 4, pp. 2290-2295, Apr. <span class="year">2021</span>.</span>
+                </div>
+            </div>
+
+            <!-- 9 -->
+            <div class="paper-item">
+                <span class="paper-number">9</span>
+                <div class="paper-content">
+                    <div class="authors">
+                        <span class="highlight">Qiang Xiao</span>, Z.G. Zeng, T.W. Huang, and F.L. Lewis,
+                    </div>
+                    <span class="paper-title">“Positivity and stability of delayed timescale-type differential-difference equations,”</span>
+                    <span class="journal">IEEE Transactions on Automatic Control,</span>
+                    <span class="meta">vol. 67, no. 7, pp. 3221-3226, Jun. <span class="year">2021</span>.</span>
+                </div>
+            </div>
+
+            <!-- 10 -->
+            <div class="paper-item">
+                <span class="paper-number">10</span>
+                <div class="paper-content">
+                    <div class="authors">
+                        <span class="highlight">Qiang Xiao</span>, T.W. Huang, and Z.G. Zeng,
+                    </div>
+                    <span class="paper-title">“Stabilization of nonautonomous recurrent neural networks with bounded and unbounded time-varying delays on time scales,”</span>
+                    <span class="journal">IEEE Transactions on Cybernetics,</span>
+                    <span class="meta">vol. 50, no. 10, pp. 4307-4317, Oct. <span class="year">2020</span>.</span>
+                </div>
+            </div>
+
+            <!-- 11 -->
+            <div class="paper-item">
+                <span class="paper-number">11</span>
+                <div class="paper-content">
+                    <div class="authors">
+                        <span class="highlight">Qiang Xiao</span>, F.L. Lewis, and Z.G. Zeng,
+                    </div>
+                    <span class="paper-title">“Containment control for multi-agent systems under two intermittent control schemes,”</span>
+                    <span class="journal">IEEE Transactions on Automatic Control,</span>
+                    <span class="meta">vol. 64, no. 3, pp. 1236-1243, Mar. <span class="year">2019</span>.</span>
+                </div>
+            </div>
+
+            <!-- 12 (ESI 1%) -->
+            <div class="paper-item">
+                <span class="paper-number">12</span>
+                <div class="paper-content">
+                    <div class="authors">
+                        <span class="highlight">Qiang Xiao</span>, Z.K. Huang, and Z.G. Zeng,
+                    </div>
+                    <span class="paper-title">“Passivity analysis of memristor-based inertial neural networks with discrete and distributed delays,”</span>
+                    <span class="journal">IEEE Transactions on Systems Man and Cybernetics: Systems,</span>
+                    <span class="meta">vol. 49, no. 2, pp. 375-385, Feb. <span class="year">2019</span>.</span>
+                    <span class="esi-tag">ESI 1%</span>
+                </div>
+            </div>
+
+            <!-- 13 -->
+            <div class="paper-item">
+                <span class="paper-number">13</span>
+                <div class="paper-content">
+                    <div class="authors">
+                        <span class="highlight">Qiang Xiao</span>, T.W. Huang, and Z.G. Zeng,
+                    </div>
+                    <span class="paper-title">“Global exponential stability and synchronization for discrete-time inertial neural networks with time delays: A timescale approach,”</span>
+                    <span class="journal">IEEE Transactions on Neural Networks and Learning Systems,</span>
+                    <span class="meta">vol. 30, no. 6, pp. 1854-1866, Jun. <span class="year">2019</span>.</span>
+                </div>
+            </div>
+
+            <!-- 14 -->
+            <div class="paper-item">
+                <span class="paper-number">14</span>
+                <div class="paper-content">
+                    <div class="authors">
+                        <span class="highlight">Qiang Xiao</span>, F.L. Lewis, and Z.G. Zeng,
+                    </div>
+                    <span class="paper-title">“Event-based pinning control for complex networks on time scales and application,”</span>
+                    <span class="journal">IEEE Transactions on Industrial Electronics,</span>
+                    <span class="meta">vol. 65, no. 11, pp. 8797-8808, Nov. <span class="year">2018</span>.</span>
+                </div>
+            </div>
+
+            <!-- 15 -->
+            <div class="paper-item">
+                <span class="paper-number">15</span>
+                <div class="paper-content">
+                    <div class="authors">
+                        <span class="highlight">Qiang Xiao</span> and Z.G. Zeng,
+                    </div>
+                    <span class="paper-title">“Lagrange stability for T-S fuzzy memristive neural networks with time-varying delays on time scales,”</span>
+                    <span class="journal">IEEE Transactions on Fuzzy Systems,</span>
+                    <span class="meta">vol. 26, no. 3, pp. 1091-1103, Jun. <span class="year">2018</span>.</span>
+                </div>
+            </div>
+
+            <!-- 16 -->
+            <div class="paper-item">
+                <span class="paper-number">16</span>
+                <div class="paper-content">
+                    <div class="authors">
+                        <span class="highlight">Qiang Xiao</span>, T.W. Huang, and Z.G. Zeng,
+                    </div>
+                    <span class="paper-title">“Passivity and passification of fuzzy memristive inertial neural networks on time scales,”</span>
+                    <span class="journal">IEEE Transactions on Fuzzy Systems,</span>
+                    <span class="meta">vol. 26, no. 6, pp. 3342-3355, Dec. <span class="year">2018</span>.</span>
+                </div>
+            </div>
+
+            <!-- 17 -->
+            <div class="paper-item">
+                <span class="paper-number">17</span>
+                <div class="paper-content">
+                    <div class="authors">
+                        <span class="highlight">Qiang Xiao</span> and Z.G. Zeng,
+                    </div>
+                    <span class="paper-title">“Scale-limited Lagrange stability and finite-time synchronization for memristive recurrent neural networks on time scales,”</span>
+                    <span class="journal">IEEE Transactions on Cybernetics,</span>
+                    <span class="meta">vol. 47, no. 10, pp. 2984-2994, Oct. <span class="year">2017</span>.</span>
+                </div>
+            </div>
+
+            <!-- 18 -->
+            <div class="paper-item">
+                <span class="paper-number">18</span>
+                <div class="paper-content">
+                    <div class="authors">
+                        <span class="highlight">Qiang Xiao</span> and T.W. Huang,
+                    </div>
+                    <span class="paper-title">“Stability of delayed inertial neural networks on time scales: A unified matrix-measure approach,”</span>
+                    <span class="journal">Neural Networks,</span>
+                    <span class="meta">vol. 130, pp. 33-38, Oct. <span class="year">2020</span>.</span>
+                </div>
+            </div>
+
+            <!-- 19 (ESI 1%) -->
+            <div class="paper-item">
+                <span class="paper-number">19</span>
+                <div class="paper-content">
+                    <div class="authors">
+                        <span class="highlight">Qiang Xiao</span> and Z.K. Huang,
+                    </div>
+                    <span class="paper-title">“Consensus of multi-agent system with distributed control on time scales,”</span>
+                    <span class="journal">Applied Mathematics and Computation,</span>
+                    <span class="meta">vol. 277, pp. 54-71, Mar. <span class="year">2016</span>.</span>
+                    <span class="esi-tag">ESI 1%</span>
+                </div>
+            </div>
+
+            <!-- 20 (corresponding) -->
+            <div class="paper-item">
+                <span class="paper-number">20</span>
+                <div class="paper-content">
+                    <div class="authors">
+                        J.Y. Ni, Y. Sheng, <span class="highlight">Qiang Xiao</span> (Corresponding author), Z.G. Zeng, and T.W. Huang,
+                    </div>
+                    <span class="paper-title">“Stability of partially unstable discrete-time switched positive nonlinear systems with delays,”</span>
+                    <span class="journal">Applied Mathematics and Computation,</span>
+                    <span class="meta">vol. 507, Article 129591, Dec. <span class="year">2025</span>.</span>
+                </div>
+            </div>
+
+            <!-- 21 (corresponding) -->
+            <div class="paper-item">
+                <span class="paper-number">21</span>
+                <div class="paper-content">
+                    <div class="authors">
+                        L.Y. Wang, T.W. Huang, and <span class="highlight">Qiang Xiao</span> (Corresponding author),
+                    </div>
+                    <span class="paper-title">“Lagrange stability of delayed switched inertial neural networks,”</span>
+                    <span class="journal">Neurocomputing,</span>
+                    <span class="meta">vol. 381, pp. 52-60, Mar. <span class="year">2020</span>.</span>
+                </div>
+            </div>
+
+            <!-- 22 (corresponding) -->
+            <div class="paper-item">
+                <span class="paper-number">22</span>
+                <div class="paper-content">
+                    <div class="authors">
+                        L.Y. Wang, T.W. Huang, and <span class="highlight">Qiang Xiao</span> (Corresponding author),
+                    </div>
+                    <span class="paper-title">“Global exponential synchronization of nonautonomous recurrent neural networks with time delays on time scales,”</span>
+                    <span class="journal">Applied Mathematics and Computation,</span>
+                    <span class="meta">vol. 328, pp. 263-275, Jul. <span class="year">2018</span>.</span>
+                </div>
+            </div>
+
+        </div> <!-- paper-list -->
+
+        <div class="footer-note">
+            <span>✦ 共 22 篇 &nbsp;·&nbsp; 红色 = 第一/通讯作者 &nbsp;·&nbsp; 蓝色 = 期刊名</span>
+        </div>
+    </div> <!-- container -->
+</body>
+</html>
