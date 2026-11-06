@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qiang Xiao · 学术服务</title>
-    <!-- 字体 -->
+    <title>Qiang Xiao · Academic Service</title>
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@
             min-height: 100vh;
         }
 
-        /* ---- 导航栏（毛玻璃） ---- */
+        /* ---- Navbar (frosted glass) ---- */
         .navbar {
             max-width: 1100px;
             width: 100%;
@@ -131,7 +131,7 @@
             }
         }
 
-        /* ---- 主容器 ---- */
+        /* ---- Main container ---- */
         .container {
             max-width: 1100px;
             width: 100%;
@@ -142,18 +142,18 @@
             transition: all 0.2s ease;
         }
 
-        /* ---- 页眉（与导航栏风格一致） ---- */
+        /* ---- Header (consistent with navbar style) ---- */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             margin-bottom: 2.2rem;
-            padding: 0.8rem 1.8rem;          /* 与导航栏内边距一致 */
+            padding: 0.8rem 1.8rem;          /* same padding as navbar */
             background: rgba(255, 255, 255, 0.65);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            border-radius: 60px;              /* 与导航栏圆角一致 */
+            border-radius: 60px;              /* same radius as navbar */
             border: 1px solid rgba(255, 255, 255, 0.5);
             box-shadow: 0 4px 16px -6px rgba(0, 20, 40, 0.05);
             transition: all 0.2s ease;
@@ -167,7 +167,7 @@
         .header h1 {
             font-family: 'Merriweather', serif;
             font-weight: 700;
-            font-size: 1.6rem;               /* 与论文列表页完全一致 */
+            font-size: 1.6rem;               /* matches the publications page exactly */
             letter-spacing: -0.02em;
             background: linear-gradient(145deg, #0b1a33 0%, #1d3a5c 100%);
             -webkit-background-clip: text;
@@ -192,7 +192,7 @@
             white-space: nowrap;
         }
 
-        /* ---- 主要内容 ---- */
+        /* ---- Main content ---- */
         .profile-section {
             display: flex;
             flex-direction: column;
@@ -255,7 +255,7 @@
             border-bottom-color: #0b1a33;
         }
 
-        /* 两列布局（用于研究兴趣 / 联系信息） */
+        /* Two-column layout (research interests / contact) */
         .info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -323,7 +323,7 @@
             border-bottom-color: #0b1a33;
         }
 
-        /* 响应式 */
+        /* Responsive */
         @media (max-width: 700px) {
             .container {
                 padding: 1.5rem 1rem;
@@ -333,11 +333,11 @@
                 flex-direction: row;
                 flex-wrap: wrap;
                 gap: 0.5rem;
-                padding: 0.6rem 1.2rem;      /* 移动端内边距也统一 */
+                padding: 0.6rem 1.2rem;      /* mobile padding unified too */
                 border-radius: 40px;
             }
             .header h1 {
-                font-size: 1.3rem;            /* 移动端字号与论文列表页统一 */
+                font-size: 1.3rem;            /* mobile font size unified with publications page */
             }
             .navbar {
                 padding: 0.5rem 1.2rem;
@@ -406,72 +406,72 @@
 </head>
 <body>
 
-    <!-- 导航栏（毛玻璃 + 微交互） -->
+    <!-- Navbar (frosted glass + micro-interactions) -->
     <nav class="navbar">
         <a href="#" class="nav-brand">
             <span class="brand-icon">✧</span>
             <span>Q. Xiao</span>
         </a>
         <div class="nav-links">
-                         <a href="index.html">个人首页</a>
-            <a href="publication.html">学术论文</a>
-          <a href="project.html">基金项目</a>
-            <a href="teaching.html">课程教学</a>
-            <a href="honoraward.html">荣誉奖励</a>
-          <a href="service.html" class="active">学术服务</a>
+                         <a href="index.html">Homepage</a>
+            <a href="publication.html">Publication</a>
+          <a href="project.html">Funding</a>
+            <a href="teaching.html">Teaching</a>
+            <a href="honoraward.html">Honor &amp; Awards</a>
+          <a href="service.html" class="active">Academic Service</a>
         </div>
         <span class="nav-meta">✦ 2026</span>
     </nav>
 
     <div class="container">
-        <!-- 头部：毛玻璃 + 渐变文字（与导航栏统一） -->
+        <!-- Header: frosted glass + gradient text (consistent with navbar) -->
         
 
-        <!-- 主要内容 -->
+        <!-- Main content -->
         <div class="profile-section">
 
             <div class="profile-card">
-                <h2> 1 学术报告</h2>
+                <h2> 1 Invited Talks</h2>
                 <ul style="list-style: none; padding: 0; margin: 0.2rem 0 0.2rem 0; color: #1f2a3f; font-size: 0.95rem; line-height: 1.8;">
-                     <li>✦  <strong> 中国自动化大会优博成长论坛</strong>  
-                     <li>✦  <strong> 神经形态计算国际会议</strong>      
+                     <li>✦  <strong> Outstanding Doctoral Dissertation Awardees Forum, China Automation Congress (CAC)</strong>  
+                     <li>✦  <strong> International Conference on Neuromorphic Computing (ICNC)</strong>      
                 </ul>
             </div>
             
             <div class="profile-card">
-                <h2> 2 期刊编委</h2>
+                <h2> 2 Editorial Board Memberships</h2>
                 <ul style="list-style: none; padding: 0; margin: 0.2rem 0 0.2rem 0; color: #1f2a3f; font-size: 0.95rem; line-height: 1.8;">
                      <li>✦  <strong> IEEE Systems Man and Cybernetics Magazine</strong>
-                     <li>✦  <strong> 信息与控制</strong>（青年）
-                     <li>✦  <strong> 人工智能科学与工程</strong>（青年）
+                     <li>✦  <strong> Information and Control</strong> (Youth Editorial Board)
+                     <li>✦  <strong> Artificial Intelligence Science and Engineering</strong> (Youth Editorial Board)
                 </ul>
             </div>
 
             <div class="profile-card">
-                <h2> 3 项目评审</h2>
+                <h2> 3 Grant Reviewing</h2>
                 <ul style="list-style: none; padding: 0; margin: 0.2rem 0 0.2rem 0; color: #1f2a3f; font-size: 0.95rem; line-height: 1.8;">
-                     <li>✦  <strong> 国家自然科学基金项目</strong>
-                     <li>✦  <strong> 广东省科技厅项目</strong>
+                     <li>✦  <strong> National Natural Science Foundation of China (NSFC) Proposals</strong>
+                     <li>✦  <strong> Guangdong Provincial Department of Science and Technology Projects</strong>
                 </ul>
             </div>
 
             <div class="profile-card">
-                <h2> 4 学术成员</h2>
+                <h2> 4 Professional Memberships</h2>
                 <ul style="list-style: none; padding: 0; margin: 0.2rem 0 0.2rem 0; color: #1f2a3f; font-size: 0.95rem; line-height: 1.8;">
                      <li>✦  <strong> IEEE</strong> Senior Member
                      <li>✦  <strong> Asia Pacific Neural Network Society</strong> Member    
-                     <li>✦  <strong> 中国自动化学会</strong> 会员
-                     <li>✦  <strong> 中国自动化学会学生工作委员会（筹）</strong> 委员
-                     <li>✦  <strong> 中国自动化学会机器人学习专业委员会（筹）</strong> 会员
-                     <li>✦  <strong> 中国人工智能学会</strong> 会员
-                     <li>✦  <strong> 中国人工智能学会青年工作委员会</strong> 会员
-                     <li>✦  <strong> 中国人工智能学会智能融合专业委员会</strong> 会员
-                     <li>✦  <strong> 中国运筹学会</strong> 会员
+                     <li>✦  <strong> Chinese Association of Automation (CAA)</strong>, Member
+                     <li>✦  <strong> CAA Student Affairs Committee (in preparation)</strong>, Committee Member
+                     <li>✦  <strong> CAA Technical Committee on Robot Learning (in preparation)</strong>, Member
+                     <li>✦  <strong> Chinese Association for Artificial Intelligence (CAAI)</strong>, Member
+                     <li>✦  <strong> CAAI Youth Working Committee</strong>, Member
+                     <li>✦  <strong> CAAI Technical Committee on Intelligent Fusion</strong>, Member
+                     <li>✦  <strong> Operations Research Society of China (ORSC)</strong>, Member
                 </ul>
             </div>
             
               <div class="profile-card">
-                <h2> 5 会议服务</h2>
+                <h2> 5 Conference Service</h2>
                 <ul style="list-style: none; padding: 0; margin: 0.2rem 0 0.2rem 0; color: #1f2a3f; font-size: 0.95rem; line-height: 1.8;">
                     <li>✦ <strong>Publication Chair</strong>, ICNC 2026, (December 25-27, 2026, Wuhan, China) 
                     <li>✦ <strong>Publicity Chair</strong>, ICNC 2024, (December 13-15, 2024, Chongqing, China) 
@@ -485,7 +485,7 @@
         </div> <!-- profile-section -->
 
         <div class="footer-note">
-            <span>✦ 保持好奇 · 保持探索</span>
+            <span>✦ Stay curious · Keep exploring</span>
         </div>
     </div> <!-- container -->
 </body>

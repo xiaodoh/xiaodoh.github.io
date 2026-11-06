@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Qiang Xiao · Teaching</title>
-    <!-- 字体 -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@
             min-height: 100vh;
         }
 
-        /* ---- 导航栏（毛玻璃） ---- */
+        /* ---- Navbar (frosted glass) ---- */
         .navbar {
             max-width: 1100px;
             width: 100%;
@@ -131,7 +131,7 @@
             }
         }
 
-        /* ---- 主容器 ---- */
+        /* ---- Main container ---- */
         .container {
             max-width: 1100px;
             width: 100%;
@@ -142,18 +142,18 @@
             transition: all 0.2s ease;
         }
 
-        /* ---- 页眉（与导航栏风格一致） ---- */
+        /* ---- Header (consistent with navbar style) ---- */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             margin-bottom: 2.2rem;
-            padding: 0.8rem 1.8rem;          /* 与导航栏内边距一致 */
+            padding: 0.8rem 1.8rem;          /* same padding as navbar */
             background: rgba(255, 255, 255, 0.65);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            border-radius: 60px;              /* 与导航栏圆角一致 */
+            border-radius: 60px;              /* same radius as navbar */
             border: 1px solid rgba(255, 255, 255, 0.5);
             box-shadow: 0 4px 16px -6px rgba(0, 20, 40, 0.05);
             transition: all 0.2s ease;
@@ -167,7 +167,7 @@
         .header h1 {
             font-family: 'Merriweather', serif;
             font-weight: 700;
-            font-size: 1.6rem;               /* 与论文列表页完全一致 */
+            font-size: 1.6rem;               /* matches the publications page exactly */
             letter-spacing: -0.02em;
             background: linear-gradient(145deg, #0b1a33 0%, #1d3a5c 100%);
             -webkit-background-clip: text;
@@ -192,7 +192,7 @@
             white-space: nowrap;
         }
 
-        /* ---- 主要内容 ---- */
+        /* ---- Main content ---- */
         .profile-section {
             display: flex;
             flex-direction: column;
@@ -255,7 +255,7 @@
             border-bottom-color: #0b1a33;
         }
 
-        /* 两列布局（用于研究兴趣 / 联系信息） */
+        /* Two-column layout (research interests / contact) */
         .info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -323,7 +323,7 @@
             border-bottom-color: #0b1a33;
         }
 
-        /* 响应式 */
+        /* Responsive */
         @media (max-width: 700px) {
             .container {
                 padding: 1.5rem 1rem;
@@ -333,11 +333,11 @@
                 flex-direction: row;
                 flex-wrap: wrap;
                 gap: 0.5rem;
-                padding: 0.6rem 1.2rem;      /* 移动端内边距也统一 */
+                padding: 0.6rem 1.2rem;      /* mobile padding unified too */
                 border-radius: 40px;
             }
             .header h1 {
-                font-size: 1.3rem;            /* 移动端字号与论文列表页统一 */
+                font-size: 1.3rem;            /* mobile font size unified with publications page */
             }
             .navbar {
                 padding: 0.5rem 1.2rem;
@@ -406,45 +406,45 @@
 </head>
 <body>
 
-    <!-- 导航栏（毛玻璃 + 微交互） -->
+    <!-- Navbar (frosted glass + micro-interactions) -->
     <nav class="navbar">
         <a href="#" class="nav-brand">
             <span class="brand-icon">✧</span>
             <span>Q. Xiao</span>
         </a>
         <div class="nav-links">
-                         <a href="index.html">个人首页</a>
-            <a href="publication.html">学术论文</a>
-          <a href="project.html">基金项目</a>
-            <a href="teaching.html" class="active">课程教学</a>
-            <a href="honoraward.html">荣誉奖励</a>
-            <a href="service.html">学术服务</a>
+                         <a href="index.html">Homepage</a>
+            <a href="publication.html">Publication</a>
+          <a href="project.html">Funding</a>
+            <a href="teaching.html" class="active">Teaching</a>
+            <a href="honoraward.html">Honor &amp; Awards</a>
+            <a href="service.html">Academic Service</a>
         </div>
         <span class="nav-meta">✦ 2026</span>
     </nav>
 
     <div class="container">
-        <!-- 头部：毛玻璃 + 渐变文字（与导航栏统一） -->
+        <!-- Header: frosted glass + gradient text (consistent with navbar) -->
         
 
-        <!-- 主要内容 -->
+        <!-- Main content -->
         <div class="profile-section">
 
  
 
             
             <div class="profile-card">
-                <h2> 1 本科生</h2>
+                <h2> 1 Undergraduate Courses</h2>
                 <ul style="list-style: none; padding: 0; margin: 0.2rem 0 0.2rem 0; color: #1f2a3f; font-size: 0.95rem; line-height: 1.8;">
-                     <li>✦  <strong> 离散数学 </strong>  
-                     <li>✦  <strong> 英文论文写作 </strong>  
+                     <li>✦  <strong> Discrete Mathematics </strong>  
+                     <li>✦  <strong> Academic Writing in English </strong>  
                 </ul>
             </div>
 
             <div class="profile-card">
-                <h2> 2 研究生</h2>
+                <h2> 2 Graduate Courses</h2>
                 <ul style="list-style: none; padding: 0; margin: 0.2rem 0 0.2rem 0; color: #1f2a3f; font-size: 0.95rem; line-height: 1.8;">
-                     <li>✦  <strong> 非线性控制理论基础</strong>   
+                     <li>✦  <strong> Fundamentals of Nonlinear Control Theory</strong>   
                 </ul>
             </div>
 
@@ -453,7 +453,7 @@
         </div> <!-- profile-section -->
 
         <div class="footer-note">
-            <span>✦ 保持好奇 · 保持探索</span>
+            <span>✦ Stay curious · Keep exploring</span>
         </div>
     </div> <!-- container -->
 </body>
